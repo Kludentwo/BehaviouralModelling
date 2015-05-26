@@ -1,0 +1,28 @@
+\input{preamble}
+\raggedbottom
+\begin{document}
+
+%\pagestyle{empty}
+\include{filer/1forside}
+\pagestyle{IHA}
+
+\setcounter{page}{1}
+%Include files here:
+\include{filer/2Abstract}
+\tableofcontents
+\include{filer/3Preliminary}
+\include{filer/4Introduction}
+%Include more files containing the course info
+\include{filer/15Conclusion}
+%\include{filer/16References}
+
+
+%%%% Kilder %%%%
+\begingroup
+	\raggedright
+	\bibliography{bibtex/litteratur}							% Litteraturlisten inkluderes
+\endgroup
+
+
+
+\end{document}
