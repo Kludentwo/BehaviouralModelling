@@ -4,6 +4,24 @@ This chapter contains the focus of this report.
 \section{High Level Synthesis}
 Brief introduction to high level synthesis in general
 
+\section{Example Problem}
+The problem chosen in this project is a least squares problem known from the world of optimisation. Least squares are used for regression by finding an estimate $\hat{x}$ that fulfils the equation $A\textbf{x} = \textbf{b}$. This is done using the following equation:
+\begin{equation}
+\label{leastsquares}
+\hat{x} = (A^T * A)^{-1}*A^T*\textbf{b}
+\end{equation}
+The example is defined as:\\
+A = $3 \times 3$~matrix
+\[ \left( \begin{array}{ccc}
+1 & 2 & 3 \\
+3 & 4 & 5 \\
+5 & 6 & 8 \end{array} \right)\] \\
+b = $3 \times 1$~vector
+\[ \left( \begin{array}{c}
+4 \\
+2 \\
+1 \end{array} \right)\]
+
 \section{What is HLS Directives?}
 Vivado HLS features are long list of optimisation directives which can be found in the XILINX Vivado High level synthesis user guide. These directives can be applied to interfaces, functions, loops, arrays and regions. 
 
