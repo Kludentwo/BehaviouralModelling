@@ -9,8 +9,8 @@ High-Level Synthesis is a way to design hardware using high abstraction layers. 
 \caption{Abstraction levels in FPGA designs from The Zynq Book}
 \label{fig:abslevels}
 \end{figure}
-An interesting question is then: "Why use High-Level synthesis for hardware when it is design in C++, C etc. ?". The short answer to that question would be that hardware gives you tight control with two fundamental metrics in you  design: Area (or resource cost) and Speed. The goal is to high the highest speed (or throughput) with the lowest possible area requirement, that still satisfies your design solution.\\
-Using a tool like Vivado HLS, it is possible to analyse and compare design agaist each other. The tool also offers a wide range of optimisation possibilities. The  optimisation possibilities are also known as optimisation directives. These directives can be found in the Vivado Design Suite User Guide\footnote{http://www.xilinx.com/products/design-tools/vivado/integration/esl-design.html} in table 1-23. An small excerpt of these can be found in table \ref{tab:directives}.
+An interesting question is then: "Why use High-Level synthesis for hardware when the environment is C++, C etc. ?". The short answer to that question would be that hardware gives you tight control with two fundamental metrics in your design: Area (or resource cost) and Speed. The goal is to have the highest speed (or throughput) with the lowest possible area requirement, that still satisfies your design solution.\\
+Using a tool like Vivado HLS, it is possible to analyse and compare design against each other. The tool also offers a wide range of optimisation possibilities. The  optimisation possibilities are also known as optimisation directives. These directives can be found in table 1-23 in the Vivado Design Suite User Guide\footnote{http://www.xilinx.com/products/design-tools/vivado/integration/esl-design.html}. An small excerpt of these can be found in table \ref{tab:directives}.
 \begin{table}[H]
 \centering
     \begin{tabular}{|l|p{10cm}|}
@@ -44,7 +44,7 @@ IRow: for (  int i = 0; i < 3, i++ )
 	}
 }
 \end{lstlisting}
-As an example pipelining a function like above causes the software to unroll all loops in the hierarchy. It reduces latency as the cost of increasing area. This can be seen in the synthesis report when the software tool has finished the C synthesis.
+As an example, pipelining a function like above causes the software to unroll all loops in the hierarchy. It reduces latency as the cost of increasing area. This can be seen in the synthesis report when the software tool has finished the C synthesis.
 
 \section{Example Problem}
 \label{sec:example}
@@ -79,7 +79,7 @@ $(A' * A)^{-1}$ = $3 \times 3$~matrix
 This means the float data type must be used. The float data type is 32 bit and four times as large as the signed char data type originally though to fulfil the requirement. This will increase the resource requirement of the project.
 
 \section{HLS Implementation}
-The implementation of a least squares function in HLS is done using the matrix multiplication example found in Lab 1 from the "High-Level Sythesis Flow on Zynq using Vivado" workshop\footnote{http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-high-level-synthesis-flow-zynq.html}. The example is modified to fit the project at hand. A function for transposing a matrix is added to the solution along with a function for inverting a matrix. The inverse function is heavily inspired by a solution written by Mr. Ree at stackoverflow.com\footnote{http://stackoverflow.com/questions/983999/simple-3x3-matrix-inverse-code-c}.
+The implementation of a least squares function in HLS is done using the matrix multiplication example found in Lab 1 from the "High-Level Synthesis Flow on Zynq using Vivado" workshop\footnote{http://www.xilinx.com/support/university/vivado/vivado-workshops/Vivado-high-level-synthesis-flow-zynq.html}. The example is modified to fit the project at hand. A function for transposing a matrix is added to the solution along with a function for inverting a matrix. The inverse function is heavily inspired by a solution written by Mr. Ree at stackoverflow.com\footnote{http://stackoverflow.com/questions/983999/simple-3x3-matrix-inverse-code-c}.
 The least squares function is defined as:
 \begin{lstlisting}[caption={Least Squares function definition},label=lstsquares]
 #define MAT_A_ROWS 3
@@ -94,7 +94,7 @@ void leastSquares(mat_a_t a[MAT_A_ROWS][MAT_A_COLS],
       mat_a_t b[MAT_B_ROWS][MAT_B_COLS],
       result_t xhat[MAT_A_ROWS][MAT_B_COLS]);
 \end{lstlisting}
-with a being the A matrix mentioned in section \ref{sec:example}, b being the vector and xhat being $\hat{x}$. The flow through the function can be described as can be seen in figure \ref{fig:LSFunc}.
+with "a" being the A matrix mentioned in section \ref{sec:example}, "b" being the vector and "xhat" being $\hat{x}$. The flow through the function can be described as can be seen in figure \ref{fig:LSFunc}.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=1]{billeder/leastSquaresFunc}
@@ -162,7 +162,7 @@ Going back to the simulation and using the analysis view and breaking down the r
 With the HLS Implementation complete the task is now to analyse the synthesis and how it can be optimised with regards to resources and latency.
 \section{Optimisation}
 \subsection{Optimising for speed}
-Optimising for speed means analysing figure \ref{fig:OrigBreak} for the functions with the most latency and then evaluate which directive can improve the latency. Evaluating the code with pipelining and dataflow provides insight into the possibilities. The dataflow directive cannot be implemented in the functions. The reason being that the same memory area is read multiple subsequent instances. The synthesis simply fails in the Vivado HLS tool.
+Optimising for speed means analysing figure \ref{fig:OrigBreak} for the functions with the most latency and then evaluate which directive can improve the latency. Evaluating the code with pipelining and dataflow provides insight into the possibilities. The dataflow directive cannot be implemented in the functions. The reason being that the same memory area is read in multiple subsequent instances. The synthesis simply fails in the Vivado HLS tool.
 A lot of the calculations are made in for loops. Pipelining these loops will result in fewer cycles overall as explained very well in the Vivado High-Level Synthesis User guide using figure \ref{fig:looppipelining}.
 \begin{figure}[H]
 \centering
