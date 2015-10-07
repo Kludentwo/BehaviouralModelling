@@ -7,7 +7,7 @@ Diffusion processes can also be called walks. This section seeks to explain some
 \subsection{Brownian motion}
 Brownian motion is a type of random walk where the motion follows a Gaussian distribution. In mathematically terms this can be shown as follows:
 \begin{equation}
-$Pathlength $ \sim \mathcal{N}(0,t-s) ($for $ 0 \leq s \leq t)
+$Step size $ \sim \mathcal{N}(0,t-s) ($for $ 0 \leq s \leq t)
 \label{eq:brownianm}
 \end{equation}
 This type of diffusion where the variance grows over time is called normal diffusion. Characteristic for the Brownian motion is that the walker will return to the same spot multiple times. This can be seen in a 1D model in figure \ref{fig:brownianrw}.
@@ -21,3 +21,13 @@ When looking at Brownian random walks it becomes apparent that the model might n
 Brownian motion obeys the rule of the central limit theorem. When the variance in equation \ref{eq:brownianm} gets sufficiently large the distribution will be very wide and the probability for $P(0)$ will be very low.
 
 \subsection{Levy motion}
+Lévy motion, also know as lévy flight or lévy walks, is a type of random walk where the step length generally follows a power law tailed distribution. In mathematically terms this can be shown as follows:
+\begin{equation}
+$Step size $ \sim l ^{-\mu} ($for $ 0 < l $, $1 < \mu < 3$and $ \mu = 1 + \alpha)
+\label{eq:levyrw}
+\end{equation}
+In equation \ref{eq:levyrw} the $\alpha$ is the characteristic exponent. When the number of steps gets sufficiently large the distances converges to a stable distribution. Both distributions are fat tailed allowing large step sizes.
+
+\section{The Lévy alpha-stable distribution}
+
+\section{Matlab simulation}
