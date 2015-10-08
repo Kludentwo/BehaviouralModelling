@@ -1,0 +1,22 @@
+\section{Matlab simulation}
+This section contains the though process of the Matlab simulation part of this study.
+\subsection{Implementing a data generator}
+The simplest way of looking at a levy random walk is in two dimensions. When taking a step in a new direction two things are needed. A random angle in accordance to your old heading and a step size. An approximate generator of a levy flight is implemented using matlab code found on the stackexchange website\cite{firstlevy}. The generator can be seen in listing \ref{levyflightgen}.
+\begin{lstlisting}[caption={Approximate levy flight generator},label=levyflightgen]
+alpha=1.6;
+s=1000;
+for n=2:s;
+    theta=rand*2*pi;
+    f=rand^(-1/alpha);
+    x(n)=x(n-1)+f*cos(theta);
+    y(n)=y(n-1)+f*sin(theta);
+end;
+\end{lstlisting}
+The step size follows a power law distribution but is limited by the rand which generates uniformly distributed random numbers. The model provides a basic model that is useful for understanding a levy flight generator.\\
+Doing a further search for useful information on how to implement a generator led to the discovery of a series of matlab functions found on CSIRO Marine and Atmospheric research website\cite{betterlevy}. It becomes apparent that the levy flight generator found here makes use of stable random number generator\cite{stabrnd}. The generator can be seen in listing \ref{levyflightgen2}.  
+\begin{lstlisting}[caption={Levy flight generator using a stable random number generator},label=levyflightgen2]
+  r = stabrnd(alpha, beta, c, delta, 1, n);
+  theta = 2*pi*rand(1, n);
+  x(:, 1) = r.*cos(theta);
+  x(:, 2) = r.*sin(theta);
+\end{lstlisting}
