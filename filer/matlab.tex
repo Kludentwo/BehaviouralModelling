@@ -1,5 +1,6 @@
-\section{Matlab simulation}
-This section contains the though process of the Matlab simulation part of this study.
+\section{Simulation}
+This section contains the though process of the simulation part of this study. The simulations are performed in MATLAB.
+
 \subsection{Implementing a data generator}
 The simplest way of looking at a levy random walk is in two dimensions. When taking a step in a new direction two things are needed. A random angle in accordance to your old heading and a step size. An approximate generator of a levy flight is implemented using matlab code found on the stackexchange website\cite{firstlevy}. The generator can be seen in listing \ref{levyflightgen}.
 \begin{lstlisting}[caption={Approximate levy flight generator},label=levyflightgen]
@@ -20,3 +21,33 @@ Doing a further search for useful information on how to implement a generator le
   x(:, 1) = r.*cos(theta);
   x(:, 2) = r.*sin(theta);
 \end{lstlisting}
+
+\subsection{Implementing a parameter estimator}
+Two parameter estimators have been implemented. A naive fitted distribution parameter estimator and a log|S$\alpha$S| parameter estimated based on a paper
+\cite{XinyuMa1995}. The naive fitted distribution parameter estimator works by calculating the error term with respect to the histogram of the data. This is done for multiple instances of alpha. The best fitting alpha is output in the end. The distribution is made using a matlab toolbox\cite{stbltoolbox}.
+\begin{algorithm}[H]
+\caption{Naive fitted distribution parameter estimator algorithm}
+\begin{algorithmic}
+\For {$\alpha = 1$ to $1.8$ in steps of $0.1$}
+\State $ Error(alpha) = (Distribution - Histogram)^2$
+\EndFor
+\State {$BestFit = FIND( MIN (  Error ( alpha ) )$}
+\end{algorithmic}
+\end{algorithm}
+For the output of the Naive fitted distribution parameter estimator see the results chapter.\\
+
+The log|S$\alpha$S| parameter estimator found in the paper by Xinyu Ma\cite{XinyuMa1995} uses the following equations derived in the paper:
+\begin{equation}
+\sigma^2 = \frac{\pi^2}{6}(\frac{1}{\alpha^2} + \frac{1}{2})
+\end{equation}
+\begin{equation}
+\mu = C_e ( \frac{1}{\alpha} - 1) + \frac{1}{\alpha} log(\gamma)
+\end{equation}
+where $Y = log|X|$ and $C_e=0.57721566$(The Euler constant), $\alpha$ is characteristic exponent and $\gamma$ the scale. By utilising the new random variable Y based on our dataset X we can estimate $\alpha$ and $\gamma$ using mean and variance. Solving for  the parameters yields:
+\begin{equation}
+\hat{\alpha} = \sqrt{\frac{1}{\sigma^2 * \frac{6}{\pi^2} -\frac{1}{2}}}
+\end{equation}
+\begin{equation}
+\hat{\gamma} = 10^{(\hat{\alpha} * ( \mu - C_e * ( \frac{1}{\hat{\alpha}} - 1) ) )}
+\end{equation}
+The estimated parameters are inserted into equation \ref{eq:reducedcharfunc}, with c = $\gamma$ and fourier transformed in accordance to equation \ref{eq:fourier}. The Probability density function is plotted against the histogram in the results section. The estimated parameters for multiple cases can also be found in the results section.

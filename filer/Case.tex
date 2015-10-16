@@ -1,4 +1,4 @@
-\chapter{Case Study}
+\chapter{Study}
 Animals move around when searching for things like food or a mate. Some animals move in seemingly random patterns but the interesting question is: "Is there an underlying pattern or model that describes this behaviour".\\
 When talking about animal movement behavioural animals might use a reaction-diffusion process. This process entails the movement (diffusion) and the interaction with the environment (reaction). Reaction is often described as finding food, mating a mate or finding a predator. All of these things force the animal into changing its movement behaviour. This could mean a stop in a long search for example. Reaction behaviour will not be a part of this report.
 
@@ -34,6 +34,11 @@ In equation \ref{eq:levyrw} the $\alpha$ is the characteristic exponent. When th
 \caption{Levy flight with 1000 steps and $\alpha = 1.8$}
 \label{fig:levywalk1}
 \end{figure}
+Lévy walks have an addition limit in therms of step size. This is because of way acceleration works in levy flights. It is assumed that a flight takes zero or very little time. This is not true for walking. Walking has a finite velocity. In \cite{viswanathan2011the} the Lévy walk is described with a Dirac $\delta$-function to couple space and time. This can be seen in equation \ref{eq:levywalk} where $v$ is velocity and $\tau$ is the time it takes to move $l$.
+\begin{equation}
+P($Step size$) \sim l ^{-\mu}\delta (l - v\tau)
+\label{eq:levywalk}
+\end{equation}
 
 \section{The Lévy alpha-stable distribution}
 The skew Lévy $\alpha$-stable distribution is the most general case of stable distributions. The characteristic function is given by:
@@ -55,6 +60,7 @@ The characteristics for stable distribution entail when $\alpha = 2$ the distrib
 The Probability Density function is found by Fourier transforming the characteristic function.\\
 \begin{equation}
 P(S) = \frac{1}{2\pi}\int_{-\infty}^{\infty} \varphi(t) exp[-itS] dt
+\label{eq:fourier}
 \end{equation}
 The most simple version of the characteristic function is when $\beta = 0$ and $v = 1$. The characteristic function is reduced to:
 \begin{equation}
