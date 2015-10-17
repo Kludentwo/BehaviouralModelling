@@ -1,9 +1,12 @@
 \chapter{Discussion}
+The naive fitted distribution method is a very simple way to find know alpha values. 
+The method relies upon being able to sweep through alpha values. 
+If the other parameters need to be estimated further sweeps are needed, increasing the complexity of the method. 
+The method also relies upon an intrinsic knowledge of the dataset. 
+For this reason the method is discarded.\\
+The log|S$\alpha$S| method is more reliable when it comes detecting the characteristic exponent, $\alpha$ and the scale parameter, $\gamma$. Table \ref{tab:resalpha} shows the little percentile error in this method with regards to the estimated alpha.\\
+With respect to fitting the distribution and histogram some metrics have been acquired. In order to estimate the boundaries for the characteristic function the limits must be  $\geq 1 + \alpha$. A scalefactor (not related to the characteristic function) is also applied to the fourier transform to smooth the distribution curve and remove any bias.\\
 
-\section{thoughts}
-The matlab simulation uses levy flight and not levy walk.
+%den naive metode kan kun finde alpha. Og dette kun i tilpas store spring. Hvis den skal kunne gamma også ville det kræve en del mere sweeping.
 
-den naive metode kan kun finde alpha. Og dette kun i tilpas store spring. Hvis den skal kunne gamma også ville det kræve en del mere sweeping.
-
-
-Den anden kan både alpha og gamma.
+%Den anden kan både alpha og gamma.
