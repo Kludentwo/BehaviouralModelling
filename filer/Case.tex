@@ -1,6 +1,10 @@
 \chapter{Study}
 Animals move around when searching for things like food or a mate. Some animals move in seemingly random patterns but the interesting question is: "Is there an underlying pattern or model that describes this behaviour".\\
-When talking about animal movement behavioural animals might use a reaction-diffusion process. This process entails the movement (diffusion) and the interaction with the environment (reaction). Reaction is often described as finding food, mating a mate or finding a predator. All of these things force the animal into changing its movement behaviour. This could mean a stop in a long search for example. Reaction behaviour will not be a part of this report.
+When talking about animal movement behavioural, animals might use a reaction-diffusion process. 
+This process entails the movement (diffusion) and the interaction with the environment (reaction). 
+Reaction is often described as finding food, meeting a mate or finding a predator. 
+All of these things force the animal into changing its movement behaviour. This could mean a stop in a long search for example. 
+Reaction behaviour will not be a part of this report.
 
 \section{Diffusion processes}
 Diffusion processes can also be called walks. This section seeks to explain some of the different walks and what is characteristic about them.
@@ -11,15 +15,16 @@ Brownian motion is a type of random walk where the motion follows a Gaussian dis
 P($Step size$) \sim \mathcal{N}(0,t-s) ($for $ 0 \leq s \leq t)
 \label{eq:brownianm}
 \end{equation}
-This type of diffusion where the variance grows over time is called normal diffusion. Characteristic for the Brownian motion is that the walker will return to the same spot multiple times. This can be seen in a one dimensional model in figure \ref{fig:brownianrw}.
+This type of diffusion where the variance grows over time is called normal diffusion. Characteristic for the Brownian motion is that the walker might return to the same spot multiple times. This can be seen in a one dimensional model in figure \ref{fig:brownianrw}.
 \begin{figure}[H]
 \centering
 \includegraphics[width = 0.6\textwidth]{billeder/brownian}
 \caption{Brownian Random Walk}
 \label{fig:brownianrw}
 \end{figure}
-When looking at Brownian random walks it becomes apparent that the model might not reflect animal behaviour as it would be a bad strategy to visit the same area multiple times in a search. Only when you revisit a site with fast food regeneration would this strategy seem feasible.\\
-Brownian motion obeys the rule of the central limit theorem. When the variance in equation \ref{eq:brownianm} gets sufficiently large the distribution will be very wide and the probability for $P(0)$ will be very low.
+When looking at Brownian random walks it becomes apparent that the model might not reflect animal behaviour as it would be a bad strategy to visit the same area multiple times in a search. 
+Only when you revisit a site with fast food regeneration would this strategy seem feasible.\\
+Brownian motion obeys the rule of the central limit theorem. When the variance in equation \ref{eq:brownianm} gets sufficiently large the distribution will be very wide and the probability for $P(\mu)$ will be very low.
 
 \subsection{Levy motion}
 Lévy motion, also know as lévy flight or lévy walks, is a type of random walk where the step length generally follows a power law tailed distribution. In mathematically terms this can be shown as follows:
@@ -34,7 +39,7 @@ In equation \ref{eq:levyrw} the $\alpha$ is the characteristic exponent. When th
 \caption{Levy flight with 1000 steps and $\alpha = 1.8$}
 \label{fig:levywalk1}
 \end{figure}
-Lévy walks have an addition limit in therms of step size. This is because of way acceleration works in levy flights. It is assumed that a flight takes zero or very little time. This is not true for walking. Walking has a finite velocity. In \cite{viswanathan2011the} the Lévy walk is described with a Dirac $\delta$-function to couple space and time. This can be seen in equation \ref{eq:levywalk} where $v$ is velocity and $\tau$ is the time it takes to move $l$.
+Lévy walks have an addition limit in terms of step size. This is because of the way acceleration works in levy flights. It is assumed that a flight takes zero or very little time. This is not true for walking. Walking has a finite velocity. In the book\cite{viswanathan2011the}, the Lévy walk is described with a Dirac $\delta$-function to couple space and time. This can be seen in equation \ref{eq:levywalk} where $v$ is velocity and $\tau$ is the time it takes to move $l$.
 \begin{equation}
 P($Step size$) \sim l ^{-\mu}\delta (l - v\tau)
 \label{eq:levywalk}

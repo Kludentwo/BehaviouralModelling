@@ -2,7 +2,7 @@
 This section contains the though process of the simulation part of this study. The simulations are performed in MATLAB.
 
 \subsection{Implementing a data generator}
-The simplest way of looking at a levy random walk is in two dimensions. When taking a step in a new direction two things are needed. A random angle in accordance to your old heading and a step size. An approximate generator of a levy flight is implemented using matlab code found on the stackexchange website\cite{firstlevy}. The generator can be seen in listing \ref{levyflightgen}.
+The simplest way of looking at a levy flight is in two dimensions. When taking a step in a new direction two things are needed. A random angle in accordance to your old heading and a step size. An approximate generator of a levy flight is implemented using matlab code found on the stackexchange website\cite{firstlevy}. The generator can be seen in listing \ref{levyflightgen}.
 \begin{lstlisting}[caption={Approximate levy flight generator},label=levyflightgen]
 alpha=1.6;
 s=1000;
@@ -13,7 +13,7 @@ for n=2:s;
     y(n)=y(n-1)+f*sin(theta);
 end;
 \end{lstlisting}
-The step size follows a power law distribution but is limited by the rand which generates uniformly distributed random numbers. The model provides a basic model that is useful for understanding a levy flight generator.\\
+The step size follows a power law distribution but is limited by the function rand() which generates uniformly distributed random numbers. The model provides a basic model that is useful for understanding a levy flight generator.\\
 Doing a further search for useful information on how to implement a generator led to the discovery of a series of matlab functions found on CSIRO Marine and Atmospheric research website\cite{betterlevy}. It becomes apparent that the levy flight generator found here makes use of stable random number generator\cite{stabrnd}. The generator can be seen in listing \ref{levyflightgen2}.  
 \begin{lstlisting}[caption={Levy flight generator using a stable random number generator},label=levyflightgen2]
   r = stabrnd(alpha, beta, c, delta, 1, n);
@@ -21,10 +21,11 @@ Doing a further search for useful information on how to implement a generator le
   x(:, 1) = r.*cos(theta);
   x(:, 2) = r.*sin(theta);
 \end{lstlisting}
+This generator will be able to generate the large steps otherwise seen as outliers.
 
 \subsection{Implementing a parameter estimator}
 Two parameter estimators have been implemented. A naive fitted distribution parameter estimator and a log|S$\alpha$S| parameter estimated based on a paper
-\cite{XinyuMa1995}. The naive fitted distribution parameter estimator works by calculating the error term with respect to the histogram of the data. This is done for multiple instances of alpha. The best fitting alpha is output in the end. The distribution is made using a matlab toolbox\cite{stbltoolbox}.
+\cite{XinyuMa1995}. The naive fitted distribution parameter estimator, hereafter mentioned as naive fitted distribution method, works by calculating the error term with respect to the histogram of the data. This is done for multiple instances of alpha. The best fitting alpha is output in the end. The distribution is made using a matlab toolbox\cite{stbltoolbox}.
 \begin{algorithm}[H]
 \caption{Naive fitted distribution parameter estimator algorithm}
 \begin{algorithmic}
@@ -34,7 +35,7 @@ Two parameter estimators have been implemented. A naive fitted distribution para
 \State {$BestFit = FIND( MIN (  Error ( alpha ) )$}
 \end{algorithmic}
 \end{algorithm}
-For the output of the Naive fitted distribution parameter estimator see the results chapter.\\
+For the output of the Naive fitted method see the results chapter.\\
 
 The log|S$\alpha$S| parameter estimator found in the paper by Xinyu Ma\cite{XinyuMa1995} uses the following equations derived in the paper:
 \begin{equation}
